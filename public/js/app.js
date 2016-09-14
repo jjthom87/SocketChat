@@ -1,4 +1,5 @@
 var socket = io();
+var time = moment().format("MMM Do YY");
 
 socket.on('connect', function(){
 	console.log('Connected to socket.io server!')
@@ -7,8 +8,9 @@ socket.on('connect', function(){
 socket.on('message', function(message){
 	console.log('New message:');
 	console.log(message.text);
+	var timeStamp = moment.utc(message.timestamp);
 
-	$('.messages').append('<p>' + message.text + '</p>');
+	$('.messages').append('<p><strong>' + timeStamp.local().format('h:mm a') + ": " + '</strong>' + message.text + '</p>');
 });
 
 //handles submitting of message
