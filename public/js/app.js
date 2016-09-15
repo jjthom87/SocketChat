@@ -17,10 +17,12 @@ socket.on('connect', function(){
 socket.on('message', function(message){
 	var timeStamp = moment.utc(message.timestamp);
 	var messages = $('.messages');
+	var theMessage = $('<li class="list-group-item"></li>')
 
 	$('#roomTag').text("Welcome to the " + room + " room")
-	messages.append('<p><strong>' + message.name + ' ' + timeStamp.local().format('h:mm a') + '</strong></p>');
-	messages.append('<p>' + message.text + '</p>');
+	theMessage.append('<p><strong>' + message.name + ' ' + timeStamp.local().format('h:mm a') + '</strong></p>');
+	theMessage.append('<p>' + message.text + '</p>');
+	messages.append(theMessage);
 });
 
 form.on('submit', function(e){
